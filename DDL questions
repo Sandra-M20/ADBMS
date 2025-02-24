@@ -1,0 +1,34 @@
+1. DDL (Data Definition Language) Questions
+Q1: Create a department table with the following columns: dept_id (PK), dept_name
+(not null), dept_location.
+
+create table department37(dept_id numeric primary key,dept_name varchar(30),dept_location varchar(100));
+Table created.
+DESC department37;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ DEPT_ID				   NOT NULL NUMBER(38)
+ DEPT_NAME					    VARCHAR2(30)
+ DEPT_LOCATION					    VARCHAR2(100)
+
+Q2: Write a SQL query to create an employee table with the following columns: emp_id
+(PK), emp_name, emp_salary (>20k), emp_join_date (between June 1998- till
+date), dept_id (FK).
+
+create table employee_37(emp_id numeric primary key,emp_name varchar(20) not null,emp_salary numeric(8,2) check (emp_salary>20000),emp_join_date date check (emp_join_date >= date '1998-06-01'),dept_id int,foreign key (dept_id) references department37(dept_id));
+
+Table created.
+
+SQL> desc employee_37;
+ Name					   Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMP_ID 				   NOT NULL NUMBER(38)
+ EMP_NAME				   NOT NULL VARCHAR2(20)
+ EMP_SALARY					    NUMBER(8,2)
+ EMP_JOIN_DATE					    DATE
+ DEPT_ID					    NUMBER(38)
+
+Q3: Create table support table with s_id (PK), emp_id (FK), dept_id (FK), status
+(Yes/No).
+
+
