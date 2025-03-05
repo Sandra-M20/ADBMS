@@ -2,24 +2,34 @@
 Q1: Create a department table with the following columns: dept_id (PK), dept_name
 (not null), dept_location.
 
-create table department37(dept_id numeric primary key,dept_name varchar(30),dept_location varchar(100));
+SQL>create table department37(dept_id numeric primary key,dept_name varchar(30),dept_location varchar(100));
 Table created.
-DESC department37;
+
+Q2: Write a SQL query to create an employee table with the following columns: emp_id
+(PK), emp_name, emp_salary (>20k), emp_join_date (between June 1998- till
+date), dept_id (FK).
+
+SQL>create table employee_37(emp_id numeric primary key,emp_name varchar(20) not null,emp_salary numeric(8,2) check (emp_salary>20000),emp_join_date date check (emp_join_date >= date '1998-06-01'),dept_id int,foreign key (dept_id) references department37(dept_id));
+
+Table created.
+
+
+Q3: Create table support table with s_id (PK), emp_id (FK), dept_id (FK), status
+(Yes/No).
+
+SQL>CREATE TABLE support(s_id int primary key,emp_id INT, dept_id INT,status varchar(3) CHECK(status IN('yes','no')),FOREIGN KEY (emp_id) REFERENCES employee_37(emp_id),FOREIGN KEY (dept_id) REFERENCES department37(dept_id));
+Table created.
+
+Q4: Display the schema of the above three tables.
+
+SQL>DESC department37;
  Name					   Null?    Type
  ----------------------------------------- -------- ----------------------------
  DEPT_ID				   NOT NULL NUMBER(38)
  DEPT_NAME					    VARCHAR2(30)
  DEPT_LOCATION					    VARCHAR2(100)
 
-Q2: Write a SQL query to create an employee table with the following columns: emp_id
-(PK), emp_name, emp_salary (>20k), emp_join_date (between June 1998- till
-date), dept_id (FK).
-
-create table employee_37(emp_id numeric primary key,emp_name varchar(20) not null,emp_salary numeric(8,2) check (emp_salary>20000),emp_join_date date check (emp_join_date >= date '1998-06-01'),dept_id int,foreign key (dept_id) references department37(dept_id));
-
-Table created.
-
-SQL> desc employee_37;
+SQL>desc employee_37;
  Name					   Null?    Type
  ----------------------------------------- -------- ----------------------------
  EMP_ID 				   NOT NULL NUMBER(38)
@@ -28,7 +38,27 @@ SQL> desc employee_37;
  EMP_JOIN_DATE					    DATE
  DEPT_ID					    NUMBER(38)
 
-Q3: Create table support table with s_id (PK), emp_id (FK), dept_id (FK), status
-(Yes/No).
+ SQL>desc support;
+ Name   Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ S_ID   NOT NULL NUMBER(10)
+ EMP_ID    NUMBER(10)
+ DEPT_ID    NUMBER(5)
+ STATUS    VARCHAR2(3)
 
+Q5: Alter the employee table to add a new column emp_email of type VARCHAR(100).
+
+SQL> alter table employee_37 add emp_email varchar(100);
+Table altered.
+
+Q6: Drop the support table if it is no longer required.
+SQL> drop table support;
+
+Table dropped.
+
+Q7: Modify the emp_salary column in the employee table to allow values up to
+DECIMAL(12, 2).
+
+SQL> alter table employee_37 modify emp_salary decimal(12,2);
+Table altered.
 
