@@ -62,3 +62,108 @@ DECIMAL(12, 2).
 SQL> alter table employee_37 modify emp_salary decimal(12,2);
 Table altered.
 
+
+
+
+
+
+
+
+
+
+SQL> SELECT emp_id,emp_name,emp_salary from Employee_39;
+
+    EMP_ID EMP_NAME		     EMP_SALARY
+---------- ------------------------- ----------
+	 2 Alice Johnson		  75000
+	 3 Amal 			  65000
+	 4 kiran			  65000
+	 5 Ann				  60000
+
+SQL> SELECT emp_name,emp_salary,emp_join_date FROM Employee_39 WHERE emp_salary>50000; 
+
+EMP_NAME		  EMP_SALARY EMP_JOIN_
+------------------------- ---------- ---------
+Alice Johnson		       75000 10-AUG-20
+Amal			       65000 03-OCT-21
+kiran			       65000 07-DEC-22
+Ann			       60000 10-APR-22
+
+
+ SQL>  SELECT * FROM Employee_39 ORDER BY emp_salary DESC;
+
+    EMP_ID EMP_NAME		     EMP_SALARY EMP_JOIN_    DEPT_ID
+---------- ------------------------- ---------- --------- ----------
+EMP_EMAIL
+--------------------------------------------------------------------------------
+	 2 Alice Johnson		  75000 10-AUG-20	 102
+alicejhonson@gmail.com
+
+	 3 Amal 			  65000 03-OCT-21	 103
+amal@gmail.com
+
+	 4 kiran			  65000 07-DEC-22	 104
+Kiran@gmail.com
+
+
+    EMP_ID EMP_NAME		     EMP_SALARY EMP_JOIN_    DEPT_ID
+---------- ------------------------- ---------- --------- ----------
+EMP_EMAIL
+--------------------------------------------------------------------------------
+	 5 Ann				  60000 10-APR-22	 105
+ann@gmail.com
+
+SQL> SELECT emp_name FROM Employee_39 WHERE emp_join_date > TO_DATE('2020-01-01', 'YYYY-MM-DD');
+
+EMP_NAME		  EMP_SALARY
+------------------------- ----------
+Alice Johnson		       75000
+Amal			       65000
+kiran			       65000
+Ann			       60000
+
+SQL> SELECT emp_name FROM Employee_39 WHERE emp_name LIKE 'J%';
+
+EMP_NAME
+-------------------------
+Jose
+
+
+SQL> SELECT emp_name,emp_salary FROM Employee_39 WHERE emp_salary BETWEEN 40000 AND 60000;
+
+EMP_NAME		  EMP_SALARY
+------------------------- ----------
+Ann			       60000
+
+
+SQL> SELECT dept_id, SUM(emp_salary) AS total_salary FROM Employee_39 GROUP BY dept_id;
+
+   DEPT_ID TOTAL_SALARY
+---------- ------------
+       105	  60000
+       104	  65000
+       103	  65000
+       102	  75000
+
+
+SQL> SELECT dept_id, avg(emp_salary) AS avg_salary FROM Employee_39 GROUP BY dept_id HAVING avg(emp_salary)>60000;
+
+   DEPT_ID AVG_SALARY
+---------- ----------
+       104	65000
+       103	65000
+       102	75000
+       
+
+SQL> SELECT dept_id,COUNT(*) AS num_employees FROM Employee_39  where emp_salary>50000 GROUP BY dept_id;
+
+   DEPT_ID NUM_EMPLOYEES
+---------- -------------
+       105	       1
+       104	       1
+       103	       1
+       102	       1
+       
+SELECT dept_id,count() AS total_employees FROM employee GROUP BY dept_id having COUNT()>3;
+
+
