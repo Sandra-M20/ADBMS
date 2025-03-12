@@ -71,7 +71,7 @@ Table altered.
 
 
 
-SQL> SELECT emp_id,emp_name,emp_salary from Employee_39;
+SQL> SELECT emp_id,emp_name,emp_salary from employee_37;
 
     EMP_ID EMP_NAME		     EMP_SALARY
 ---------- ------------------------- ----------
@@ -165,5 +165,55 @@ SQL> SELECT dept_id,COUNT(*) AS num_employees FROM Employee_39  where emp_salary
        102	       1
        
 SELECT dept_id,count() AS total_employees FROM employee GROUP BY dept_id having COUNT()>3;
+
+
+SQL> SELECT dept_id, COUNT(*) AS total_employees FROM employee_37 GROUP BY dept_id HAVING COUNT(*) > 3;
+
+   DEPT_ID TOTAL_EMPLOYEES
+---------- ---------------
+       102		 4
+
+
+SQL> SELECT emp_name FROM employee_37 e WHERE emp_salary > (SELECT AVG(emp_salary) FROM employee_37 WHERE dept_id = e.dept_id);
+
+EMP_NAME
+--------------------
+Alice Smith
+
+
+SQL> SELECT emp_name, emp_salary FROM employee_37 WHERE dept_id IN ( SELECT dept_id FROM department37 WHERE dept_location = 'Ernakulam');
+
+EMP_NAME	     EMP_SALARY
+-------------------- ----------
+Alice Smith		  75000
+Bob Johnson		  80000
+Jose			  45000
+Wilson			  25000
+Jose			  45000
+
+
+
+SQL> SELECT dept_name FROM department37 WHERE dept_id = (SELECT dept_id FROM ( SELECT dept_id FROM employee_37 GROUP BY dept_id ORDER BY SUM(emp_salary) DESC) WHERE ROWNUM = 1);
+
+DEPT_NAME
+------------------------------
+Marketing
+
+33)FIND EMP_ID AND EMP_NAME OF EMPLOYEE WHO ARE WORKING IN DEPARTMENT WITH LESS THAN 10 EMPLOYEES
+
+SQL> select emp_id,emp_name from employee_37 where dept_id IN (SELECT dept_id FROM employee_37 group by dept_id having count(*)<10);
+
+    EMP_ID EMP_NAME
+---------- --------------------
+	 1 John Doe
+	 2 Alice Smith
+	 3 Bob Johnson
+	 4 Charlie Brown
+	 5 David Wilson
+	 6 Jose
+	 7 Wilson
+	 8 Jose
+
+8 rows selected.
 
 
