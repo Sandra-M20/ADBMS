@@ -191,7 +191,8 @@ Jose			  45000
 Wilson			  25000
 Jose			  45000
 
-
+Q27: Write a query that returns the department name of the department with the highest
+total salary.
 
 SQL> SELECT dept_name FROM department37 WHERE dept_id = (SELECT dept_id FROM ( SELECT dept_id FROM employee_37 GROUP BY dept_id ORDER BY SUM(emp_salary) DESC) WHERE ROWNUM = 1);
 
@@ -199,7 +200,7 @@ DEPT_NAME
 ------------------------------
 Marketing
 
-33)FIND EMP_ID AND EMP_NAME OF EMPLOYEE WHO ARE WORKING IN DEPARTMENT WITH LESS THAN 10 EMPLOYEES
+28)FIND EMP_ID AND EMP_NAME OF EMPLOYEE WHO ARE WORKING IN DEPARTMENT WITH LESS THAN 10 EMPLOYEES
 
 SQL> select emp_id,emp_name from employee_37 where dept_id IN (SELECT dept_id FROM employee_37 group by dept_id having count(*)<10);
 
@@ -255,5 +256,17 @@ SQL> drop view high_salary_employee_37;
 
 View dropped.
 
+-------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------
+
+SQL> select dept_id ,sum(emp_salary) as total_salary from employee_37 group by dept_id;
+
+   DEPT_ID TOTAL_SALARY
+---------- ------------
+       105	  95000
+       104	  70000
+       101	  60000
+       103	  80000
+       102	 190000
 
 
