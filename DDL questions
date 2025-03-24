@@ -269,5 +269,12 @@ SQL> select dept_id ,sum(emp_salary) as total_salary from employee_37 group by d
        101	  60000
        103	  80000
        102	 190000
+Q34: Use AVG() to find the average salary of employees in the 'Marketing' department.
+
+SQL> select  AVG(emp_salary)  FROM employee_37 where dept_id =(select dept_id from department37 where dept_name='Marketing');
+
+AVG(EMP_SALARY)
+---------------
+	  47500
 
 
