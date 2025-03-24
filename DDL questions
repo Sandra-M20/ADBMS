@@ -258,6 +258,7 @@ View dropped.
 
 -------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------
+Q33: Write a query to find the total salary paid in each department.
 
 SQL> select dept_id ,sum(emp_salary) as total_salary from employee_37 group by dept_id;
 
