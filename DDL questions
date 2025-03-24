@@ -278,3 +278,45 @@ AVG(EMP_SALARY)
 	  47500
 
 
+Q35: Find the employee with the highest salary in each department using MAX().
+
+SQL> select dept_id,max(emp_salary) as Max_salary from employee_37 group by dept_id;
+
+   DEPT_ID MAX_SALARY
+---------- ----------
+       105	95000
+       104	70000SQL> select dept_id,max(emp_salary) as Max_salary from employee_37 group by dept_id;
+
+   DEPT_ID MAX_SALARY
+---------- ----------
+       105	95000
+       104	70000
+       101	60000
+       103	80000
+       102	75000
+
+       101	60000
+       103	80000
+       102	75000
+
+Q36: Write a query that finds the total number of employees in each department.
+
+SQL> select dept_id,count(*) as Total_employees from employee_37 group by dept_id;
+
+   DEPT_ID TOTAL_EMPLOYEES
+---------- ---------------
+       105		 1
+       104		 1
+       101		 1
+       103		 1
+       102		 4
+
+Q37: Calculate the sum of the salaries of all employees whose emp_salary is greater than
+50000.
+
+SQL> select sum(emp_salary) as Total_salary from employee_37 where emp_salary>50000;
+
+TOTAL_SALARY
+------------
+      380000
+
